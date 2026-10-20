@@ -1,3 +1,16 @@
+## What's the deal?
+
+I am quite obsessed with stealthy offensive operations, especially when EDR is running on the host. Most of the time the EDR's telemetry/detection heavily rely on Process Events which are usually obtained by hooking exec* syscall family. That's cool. However, did you know that you can run a lot of stuff with bash built-ins that will result in NO such syscalls? NO? Take this for an example:
+
+```
+while IFS= read -r line || [[ -n "$line" ]]; do     printf '%s\n' "$line"; done 2>/dev/null < /etc/passwd
+```
+The above is the same as you would `cat /etc/passwd`, however, you will not have a new process created (no exec* syscall).
+
+`read` and `printf` are builtins. Bash still makes syscalls to open/read the file and write the output.
+
+This is not silver bullet tho! If someone is tracking different syscalls (as they should, but could be noisy!) this activity would be easily trackable ;)
+
 ## Stats
 
 ### Trace execution attempts and process creation:
