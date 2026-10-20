@@ -1,4 +1,4 @@
-## What's the deal?
+## What's the deal? Execless?
 
 I am quite obsessed with stealthy offensive operations, especially when EDR is running on the host. Most of the time the EDR's telemetry/detection heavily rely on Process Events which are usually obtained by hooking exec* syscall family. That's cool. However, did you know that you can run a lot of stuff with bash built-ins that will result in NO such syscalls? NO? Take this for an example:
 
@@ -10,6 +10,10 @@ The above is the same as you would `cat /etc/passwd`, however, you will not have
 `read` and `printf` are builtins. Bash still makes syscalls to open/read the file and write the output.
 
 This is not silver bullet tho! If someone is tracking different syscalls (as they should, but could be noisy!) this activity would be easily trackable ;)
+
+Note: I do believe this is NOT novel technique and been used in the wild. However, I still there is a lot of room to "push it".
+
+Thus the meaning of "execless" in our context, we could define as : "No additional execve/execveat calls during enumeration after Bash starts. Other syscalls still occur."
 
 ## Stats
 
