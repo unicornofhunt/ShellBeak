@@ -9,11 +9,10 @@ strace -f -tt -T \
   /bin/bash --noprofile --norc ./shellbeak.sh > /dev/null
 ```
 
-### Trace all syscalls:
+### Trace all syscalls (stats):
 ```
-strace -f -tt -T -yy -s 256 \
-  -o all-syscalls.log \
-  /bin/bash --noprofile --norc ./shellbeak.sh > /dev/null
+strace -f -c -o syscall-stats.log \
+  /bin/bash --noprofile --norc ./shellbeak3.sh > /dev/null
 ```
 ### Expected output
 ```
@@ -22,3 +21,50 @@ cat exec-syscalls.log
 7583  21:01:35.371581 +++ exited with 0 +++
 ```
 Only initial bash execve call.
+
+```
+cat syscall-stats.log 
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 44.09    1.586430           0   1739202    190763 newfstatat
+ 13.65    0.491311           0   1381967       664 lseek
+  9.30    0.334524           0    719806           read
+  7.14    0.257097           0    698031    698030 ioctl
+  6.80    0.244754           0    698032           rt_sigprocmask
+  6.40    0.230252           0    239057    155261 faccessat2
+  3.91    0.140792           0    177384           getdents64
+  3.50    0.126042           1    110468        20 openat
+  2.05    0.073590           0    134791           close
+  1.38    0.049615           0     88907           fstat
+  0.96    0.034708           0    116220         1 fcntl
+  0.51    0.018418           0     46031           dup2
+  0.20    0.007089           0     23909           write
+  0.02    0.000763           2       282           brk
+  0.02    0.000712           1       664           pipe2
+  0.02    0.000616           0       797         3 access
+  0.01    0.000396           0       797           geteuid
+  0.01    0.000383           0       797           getegid
+  0.01    0.000382           0       797           getgid
+  0.01    0.000368           0       797           getuid
+  0.00    0.000110           4        24           munmap
+  0.00    0.000038           1        38           mmap
+  0.00    0.000037           0       157           mremap
+  0.00    0.000026           1        14           rt_sigaction
+  0.00    0.000025           6         4           mprotect
+  0.00    0.000009           3         3           getppid
+  0.00    0.000006           2         3           getpid
+  0.00    0.000005           1         3           prlimit64
+  0.00    0.000003           3         1           futex
+  0.00    0.000002           2         1           uname
+  0.00    0.000002           2         1           getpgrp
+  0.00    0.000002           2         1           arch_prctl
+  0.00    0.000002           2         1           set_tid_address
+  0.00    0.000002           2         1           set_robust_list
+  0.00    0.000002           2         1           getrandom
+  0.00    0.000002           2         1           rseq
+  0.00    0.000001           1         1           getgroups
+  0.00    0.000000           0         2           pread64
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    3.598516           0   6178994   1044742 total
+```
