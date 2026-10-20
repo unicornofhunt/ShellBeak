@@ -15,6 +15,21 @@ Note: I do believe this is NOT novel technique and been used in the wild. Howeve
 
 Thus the meaning of "execless" in our context, we could define as : "No additional execve/execveat calls during enumeration after Bash starts. Other syscalls still occur."
 
+## Usage
+
+Run `gtfobinsupdate.sh` to generate `gtfobins.txt` file for GTFOBins enumeration.
+
+```
+chmod +x shellbeak.sh
+```
+For full output:
+```
+ENUM_VERBOSE=1 bash ./shellbeak3.sh
+```
+Reduced output:
+```
+./shellbeak3.sh
+```
 ## Stats
 
 ### Trace execution attempts and process creation:
