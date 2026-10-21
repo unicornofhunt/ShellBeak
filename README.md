@@ -1,3 +1,5 @@
+![LinuxSilenced](/linux_silenced.png)
+
 ## What's the deal? Execless?
 
 I am quite obsessed with stealthy offensive operations, especially when EDR is running on the host. Most of the time the EDR's telemetry/detection heavily rely on Process Events which are usually obtained by hooking exec* syscall family. That's cool. However, did you know that you can run a lot of stuff with bash built-ins that will result in NO such syscalls? NO? Take this for an example:
