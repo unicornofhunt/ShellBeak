@@ -32,6 +32,10 @@ The limits: `around effective sudo -l permissions, NSS/LDAP identity, file capab
 ```
 
 Run `gtfobinsupdate.sh` to generate `gtfobins.txt` file for GTFOBins enumeration.
+- gtfobinsupdate.sh uses external programs, including curl and jq.
+- ***The execless claim applies to shellbeak.sh.***
+- gtfobins.txt is loaded from the current working directory.
+- A missing list skips that section; other enumeration continues.
 
 ```
 chmod +x shellbeak.sh
@@ -133,7 +137,6 @@ The dedicated SSH module lists top-level regular files and readability. It does 
 Finding an executable in `PATH` establishes availability only. It does not establish sudo authorization, special permissions, a usable technique or exploitability. Executables outside the current `PATH` are not searched by this check.
 `Coverage`
 Permission errors, exclusions and unsupported formats reduce visibility. An empty section or exit status 0 does not prove complete enumeration or the absence of a finding.
-
 
 ## Stats
 
