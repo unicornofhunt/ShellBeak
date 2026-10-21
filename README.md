@@ -48,7 +48,7 @@ strace -f -tt -T \
 ### Trace all syscalls (stats):
 ```
 strace -f -c -o syscall-stats.log \
-  /bin/bash --noprofile --norc ./shellbeak3.sh > /dev/null
+  /bin/bash --noprofile --norc ./shellbeak.sh > /dev/null
 ```
 ### Expected output
 ```
