@@ -113,6 +113,28 @@ Displays up to 20 entries per directory and reports omissions. Remaining eligibl
 `Packages, processes and SUID/SGID`
 Existing inventories remain enabled, including when running as root.
 
+## Known limitations
+
+`Sudo`	
+Readable policy files are shown. ShellBeak does not run `sudo -l` or evaluate effective authorization, policy plugins, includes, aliases, arguments and run-as constraints. An unreadable sudoers file does not mean the user lacks sudo permissions.
+`Accounts and groups`
+Local files provide local identities and configured memberships. They do not reproduce NSS/LDAP/SSSD resolution. A listed shell and UID make an account a login candidate, not proof that authentication is allowed.
+`File metadata`
+Bash access tests describe selected properties and current-account access. They do not provide complete owner/group/mode/ACL details. File capabilities are not enumerated; process capability masks are a different kind of information.
+`Systemd`
+Unit files are inventoried individually. Active/enabled state and effective settings after precedence and drop-in merging are not evaluated. User unit directories and some cases such as units masked with `/dev/null` are not covered.
+`Networking`
+Results describe the current network namespace. TCP owners can be unavailable because of access restrictions or process races. There is no decoded UDP/Unix socket inventory or IPv6 neighbor enumeration; the TCP address decoder assumes little-endian Linux.
+`Package databases`
+Text dpkg, pacman and APK readers are implemented. RPM and binary APK databases are detected where supported but not decoded. Presence or a version string alone does not establish a vulnerability.
+`SSH`
+The dedicated SSH module lists top-level regular files and readability. It does not dump private keys or evaluate effective SSH configuration. A readable key may nevertheless appear in the separate generic secret search if it matches and is within its scan limits.
+`GTFOBins`
+Finding an executable in `PATH` establishes availability only. It does not establish sudo authorization, special permissions, a usable technique or exploitability. Executables outside the current `PATH` are not searched by this check.
+`Coverage`
+Permission errors, exclusions and unsupported formats reduce visibility. An empty section or exit status 0 does not prove complete enumeration or the absence of a finding.
+
+
 ## Stats
 
 ### Trace execution attempts and process creation:
