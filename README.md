@@ -15,6 +15,10 @@ Note: I do believe this is NOT novel technique and been used in the wild. Howeve
 
 Thus the meaning of "execless" in our context, we could define as : "No additional execve/execveat calls during enumeration after Bash starts. Other syscalls still occur."
 
+While being quite amazing, it is a double-edge sword. There are some inherit limitations that you cannot really do from bash:
+
+The limits: `around effective sudo -l permissions, NSS/LDAP identity, file capabilities, ACL contents and binary package databases are legitimate constraints of this implementation.`
+
 ## Usage
 
 Run `gtfobinsupdate.sh` to generate `gtfobins.txt` file for GTFOBins enumeration.
