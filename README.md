@@ -22,11 +22,7 @@ Run `gtfobinsupdate.sh` to generate `gtfobins.txt` file for GTFOBins enumeration
 ```
 chmod +x shellbeak.sh
 ```
-For full output:
-```
-ENUM_VERBOSE=1 bash ./shellbeak3.sh
-```
-Reduced output:
+Execute:
 ```
 ./shellbeak3.sh
 ```
