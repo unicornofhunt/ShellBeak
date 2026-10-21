@@ -32,7 +32,7 @@ chmod +x shellbeak.sh
 ```
 Execute:
 ```
-./shellbeak3.sh
+./shellbeak.sh
 ```
 ## Stats
 
