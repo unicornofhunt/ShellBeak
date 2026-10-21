@@ -141,3 +141,25 @@ cat performance.txt
         Page size (bytes): 4096
         Exit status: 0
 ```
+
+## FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY
+
+I am not responsible for any misuse of this software.
+
+If you choose to use ShellBeak for malicious purposes, that's only on you.
+
+This tool is provided as-is for research, education, and authorized security testing only.
+
+## EDR Context
+
+I was only able to test this against MDE for Linux.
+
+The results of the test were as expected: only logged activity was initial bash execution:
+
+`/bin/bash ./shellbeak.sh`
+
+*I am not considering File Creation events or events related to creation of gtfobins helper file. However, you get these there is up to you.
+
+XDR's Timeline for the Device also confirms the above, the only relevant event would be: `shellbeak.sh was executed by bash`. I haven't noticed any additional telemetry.
+
+I haven't received any alert too.
