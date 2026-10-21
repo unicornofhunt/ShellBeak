@@ -17,6 +17,8 @@ The above is the same as you would `cat /etc/passwd`, however, you will not have
 
 This is not silver bullet tho! If someone is tracking different syscalls (as they should, but could be noisy!) this activity would be easily trackable ;)
 
+If not syscalls, I expect the usage metrics of system to skyrocket - that could be an indicator too!
+
 Note: I do believe this is NOT novel technique and been used in the wild. However, I still there is a lot of room to "push it".
 
 Thus the meaning of "execless" in our context, we could define as : "No additional execve/execveat calls during enumeration after Bash starts. Other syscalls still occur."
