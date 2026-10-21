@@ -21,6 +21,10 @@ The limits: `around effective sudo -l permissions, NSS/LDAP identity, file capab
 
 ## Usage
 
+```
+[!] Bash 4.4 or newer is required.
+```
+
 Run `gtfobinsupdate.sh` to generate `gtfobins.txt` file for GTFOBins enumeration.
 
 ```
