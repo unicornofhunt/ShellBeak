@@ -23,6 +23,8 @@ While being quite amazing, it is a double-edge sword. There are some inherit lim
 
 The limits: `around effective sudo -l permissions, NSS/LDAP identity, file capabilities, ACL contents and binary package databases are legitimate constraints of this implementation.`
 
+***NOTE: execve etc. is not necessary a Process Creation per say, execve replaces an existing process image; it does not itself create a process.***
+
 ## Usage
 
 ```
