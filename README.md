@@ -104,3 +104,40 @@ cat syscall-stats.log
 ------ ----------- ----------- --------- --------- ----------------
 100.00    3.598516           0   6178994   1044742 total
 ```
+
+### Performance
+
+```
+/usr/bin/time -v -o performance.txt \
+  /bin/bash --noprofile --norc ./ShellBeak.sh \
+  > out.txt 2> errors.txt
+```
+Due to secret hunting this will take a lot of time.
+
+My stats on super bloated Debian:
+```
+cat performance.txt
+        Command being timed: "/bin/bash --noprofile --norc ./shellbeak_last.sh"
+        User time (seconds): 1011.99
+        System time (seconds): 129.39
+        Percent of CPU this job got: 96%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 19:46.54
+        Average shared text size (kbytes): 0
+        Average unshared data size (kbytes): 0
+        Average stack size (kbytes): 0
+        Average total size (kbytes): 0
+        Maximum resident set size (kbytes): 9040
+        Average resident set size (kbytes): 0
+        Major (requiring I/O) page faults: 0
+        Minor (reclaiming a frame) page faults: 2637
+        Voluntary context switches: 194662
+        Involuntary context switches: 29942
+        Swaps: 0
+        File system inputs: 6644200
+        File system outputs: 11424
+        Socket messages sent: 0
+        Socket messages received: 0
+        Signals delivered: 0
+        Page size (bytes): 4096
+        Exit status: 0
+```
