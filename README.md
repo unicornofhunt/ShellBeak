@@ -38,6 +38,79 @@ Execute:
 ```
 ./shellbeak.sh
 ```
+## What is enumerated
+
+`Identity and local accounts`
+Bash UID/EUID/group variables, `/etc/passwd`, `/etc/group`, and `UID_MIN` from `/etc/login.defs`; highlights selected group memberships and likely login accounts.
+
+`Processes`
+Visible `/proc/PID/status` and `cmdline` entries, including credentials, effective capability masks, seccomp and `NoNewPrivs` values.
+
+`Networking`
+Interface attributes from `/sys/class/net`, kernel route/address tables, TCP listeners with available process associations, and the IPv4 ARP cache.
+
+`Permissions and mounts`
+SUID/SGID files, selected writable paths and PATH directories, `/opt` entries, and mount information.
+
+`Scheduled tasks and services`
+Readable cron/anacron files, periodic and init scripts, and system-level systemd unit files and drop-ins.
+
+`User configuration`
+Known shell startup/history files, SSH file readability, cloud configuration, Git credentials/configuration, Docker configuration, and netrc files.
+
+`Installed software`
+Text-based dpkg, pacman, and APK databases; detects supported RPM database locations without decoding their contents.
+
+`GTFOBins availability`
+Checks names from a local `gtfobins.txt` against the current `PATH`.
+
+`Secret candidates`
+Searches readable text candidates for a small set of case-insensitive keywords and prints matching lines with context.
+
+## Secrets Hunting
+The search includes `/home`, `/opt`, `/etc`, `/var/backups`, `/var/www`, `/tmp`, `/srv`, `/root`, `$HOME`, and additional home directories recorded in `/etc/passwd`. Hidden files and directories are included when accessible.
+The current patterns are case-insensitive substrings:
+```
+password
+token
+secret
+api_key
+-----BEGIN
+```
+Every matching line found within the scan limits is displayed, with two lines before and after it. Overlapping context is merged. Matching keywords are highlighted in red, and matching/context lines are shown without the generic 2,000-byte display clipping. Secret excerpts use Bash shell escaping, so special characters may appear escaped in the report.
+The summary counts matching lines, not unique credentials. Multiple keywords on one line count as one matching line. These are candidates: examples, documentation and ordinary variable names can match, while credentials without these keywords can be missed. ShellBeak does not validate credentials or test them against a service.
+The secret scanner:
+Reads readable regular files and skips symbolic links.
+Excludes names ending in `.log` or `.gz`, and entries named `node_modules` or `vendor`, case-insensitively.
+Skips `/proc`, `/sys`, `/dev`, and `/run` trees.
+Uses a NUL-byte check in the first 4 KiB as a heuristic for binary data.
+Excludes its own source and files directly used as its stdout/stderr destinations. Files written downstream by a pipeline such as `tee` are not identified by this check.
+Stops a file before processing a line exceeding 64 KiB, or when its approximately 4 MiB text-processing budget is exceeded. It reports that the remaining content was not checked.
+There is no per-file limit on the number of displayed secret matches. The scan safeguards still apply. Counts cover only the content actually processed. The text budget is not an exact underlying I/O-byte limit because ordinary Bash line reads discard NUL bytes; the initial binary probe is also only a heuristic.
+
+## Output limits and root behavior
+
+`General file contents`
+First 200 physical lines, reduced to 80 when running as root. Displayed lines are clipped to 2,000 bytes, and a line exceeding 64 KiB stops that file. Omissions are reported.
+
+`Main account/mount inventories`
+The main reads of `/etc/passwd`, `/etc/group`, and `/proc/mounts` have no line-count cap; the common long-line safeguards still apply.
+
+`Cron and systemd configuration`
+Up to 200 nonblank, noncomment lines per file, or 80 as root. Displayed lines are clipped to 2,000 bytes; the 64 KiB line and approximately 4 MiB text-processing safeguards also apply.
+
+`Periodic/init scripts as root`
+File and access information is shown; script bodies are omitted. Cron schedule and unit-file contents are still shown within their limits.
+
+`Broad writable-path enumeration`
+Skipped as root. For other users, displays up to five interesting entries per directory, with additional counts. Traversal continues beyond the display limit.
+
+`/opt inventory`
+Displays up to 20 entries per directory and reports omissions. Remaining eligible subdirectories are still traversed.
+
+`Packages, processes and SUID/SGID`
+Existing inventories remain enabled, including when running as root.
+
 ## Stats
 
 ### Trace execution attempts and process creation:
