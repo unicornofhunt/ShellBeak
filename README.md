@@ -1,4 +1,4 @@
-![LinuxSilenced](/linux_silenced.png)
+![LinuxSilenced](/ShellBeak woodpecker terminal icon.png)
 
 ## What's the deal? Execless?
 
