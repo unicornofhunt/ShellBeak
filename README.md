@@ -218,7 +218,7 @@ Due to secret hunting this will take a lot of time.
 My stats on super bloated Debian:
 ```
 cat performance.txt
-        Command being timed: "/bin/bash --noprofile --norc ./shellbeak_last.sh"
+        Command being timed: "/bin/bash --noprofile --norc ./shellbeak.sh"
         User time (seconds): 1011.99
         System time (seconds): 129.39
         Percent of CPU this job got: 96%
