@@ -237,8 +237,8 @@ The results of the test were as expected: only logged activity was initial bash 
 
 *I am not considering File Creation events or events related to creation of gtfobins helper file. However, you get these there is up to you.
 
-## Picture (icon.png) was AI generated.
-
 XDR's Timeline for the Device also confirms the above, the only relevant event would be: `shellbeak.sh was executed by bash`. I haven't noticed any additional telemetry.
 
 I haven't received any alert too.
+
+#### Picture (icon.png) was AI generated.
