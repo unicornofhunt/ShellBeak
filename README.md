@@ -113,7 +113,7 @@ cat syscall-stats.log
 
 ```
 /usr/bin/time -v -o performance.txt \
-  /bin/bash --noprofile --norc ./ShellBeak.sh \
+  /bin/bash --noprofile --norc ./shellbeak.sh \
   > out.txt 2> errors.txt
 ```
 Due to secret hunting this will take a lot of time.
