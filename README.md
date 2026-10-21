@@ -273,3 +273,6 @@ XDR's Timeline for the Device also confirms the above, the only relevant event w
 I haven't received any alert too.
 
 #### Picture (icon.png) was AI generated.
+
+## Reference:
+https://www.sysdig.com/blog/exploring-syscall-evasion
