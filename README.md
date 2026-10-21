@@ -1,5 +1,7 @@
 # SHELLBEAK
 
+ShellBeak collects Linux enumeration data using stock Bash facilities. It requires Bash 4.4 or newer and uses builtins such as read, mapfile, printf, and type, together with glob expansion, parameter expansion, and [[ ... ]] file tests.
+
 ![ShellBeak](/icon.png)
 
 ## What's the deal? Execless?
